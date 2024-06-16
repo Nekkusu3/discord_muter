@@ -1,0 +1,18 @@
+{
+  "title": "Discord Muter",
+  "type": "ServerContent",
+  "tags": [
+    "fun",
+    "realism",
+    "roleplay"
+  ],
+  "ignore": [
+    "*.psd",
+    "*.vcproj",
+    "*.svn",
+    "images/*",
+    "*.md",
+    "*.json",
+    "license"
+  ]
+}
