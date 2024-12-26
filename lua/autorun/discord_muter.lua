@@ -120,11 +120,23 @@ function mute(target_ply)
 end
 
 function commonRoundState()
-  if (gmod.GetGamemode().Name == "Trouble in Terrorist Town" or gmod.GetGamemode().Name == "TTT2 (Advanced Update)") then return (GetRoundState() == 3) and 1 or 0; end -- Round state 3 => Game is running
+  if (gmod.GetGamemode().Name == "Trouble in Terrorist Town" or gmod.GetGamemode().Name == "TTT2 (Advanced Update)") or gmod.GetGamemode().Name == "TTT2" then return (GetRoundState() == 3) and 1 or 0; end -- Round state 3 => Game is running
   if (gmod.GetGamemode().Name == "Murder") then return (gmod.GetGamemode():GetRound() == 1) and 1 or 0; end -- Round state 1 => Game is running
   -- Round state could not be determined
 
   return -1;
+end
+
+function getAlivePlayer()
+  local players = player.GetAll()
+  local alivePlayers = #players
+
+  for _, ply in ipairs(players) do
+    if not ply:Alive() and ply:IsSpec() then
+      alivePlayers = alivePlayers - 1
+    end
+  end
+  return alivePlayers
 end
 
 function joinMessage(target_ply)
@@ -306,6 +318,13 @@ hook.Add("OnStartRound", "discord_OnStartRound", function()
 end);
 
 hook.Add("PostPlayerDeath", "discord_PostPlayerDeath", function(target_ply)
+  print(getAlivePlayer())
+
+  if getAlivePlayer() <= 1 then
+    print("NOT ENOUGH ALIVE PLAYERS")
+    return
+  end
+
   if (commonRoundState() == 1) then
     if (GetConVar("discord_mute_round"):GetBool()) then
       mutePlayer(target_ply);
@@ -320,7 +339,7 @@ end);
 hook.Add("TTTEndRound", "discord_TTTEndRound", function()
   timer.Simple(0.1, function()
     unmutePlayer();
-  end);
+  end)
 end);
 
 hook.Add("TTTBeginRound", "discord_TTTBeginRound", function()
