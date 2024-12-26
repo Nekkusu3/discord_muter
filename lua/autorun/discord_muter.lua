@@ -306,12 +306,6 @@ hook.Add("OnStartRound", "discord_OnStartRound", function()
 end);
 
 hook.Add("PostPlayerDeath", "discord_PostPlayerDeath", function(target_ply)
-  print("POST PLAYER DEATH")
-  print(commonRoundState())
-  print(GetConVar("discord_mute_round"):GetBool())
-  print(GetConVar("discord_mute_duration"):GetInt())
-  print("############")
-
   if (commonRoundState() == 1) then
     if (GetConVar("discord_mute_round"):GetBool()) then
       mutePlayer(target_ply);
