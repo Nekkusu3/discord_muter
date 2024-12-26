@@ -305,7 +305,46 @@ hook.Add("OnStartRound", "discord_OnStartRound", function()
   unmutePlayer();
 end);
 
+
+hook.Add("DoPlayerDeath", "discord_doplayerdeath", function(target_ply, attacker, dmg)
+  print("DO PLAYER DEATH" .. target_ply)
+  if (commonRoundState() == 1) then
+    if (GetConVar("discord_mute_round"):GetBool()) then
+      mutePlayer(target_ply);
+    else
+      local duration = GetConVar("discord_mute_duration"):GetInt();
+      mutePlayer(target_ply, duration);
+    end
+  end
+)
+
+hook.Add("PlayerDeath", "discord_doplayerdeath", function(victim, inflictor, attacker)
+  print("PLAYER DEATH" .. victim)
+  if (commonRoundState() == 1) then
+    if (GetConVar("discord_mute_round"):GetBool()) then
+      mutePlayer(victim);
+    else
+      local duration = GetConVar("discord_mute_duration"):GetInt();
+      mutePlayer(victim, duration);
+    end
+  end
+)
+
+hook.Add("PlayerSilentDeath", "discord_doplayerdeath", function(target_ply)
+  print("PLAYER SILENT DEATH" .. target_ply)
+  if (commonRoundState() == 1) then
+    if (GetConVar("discord_mute_round"):GetBool()) then
+      mutePlayer(target_ply);
+    else
+      local duration = GetConVar("discord_mute_duration"):GetInt();
+      mutePlayer(target_ply, duration);
+    end
+  end
+)
+
+
 hook.Add("PostPlayerDeath", "discord_PostPlayerDeath", function(target_ply)
+  print("POST PLAYER DEATH" .. target_ply)
   if (commonRoundState() == 1) then
     if (GetConVar("discord_mute_round"):GetBool()) then
       mutePlayer(target_ply);
