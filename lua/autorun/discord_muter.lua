@@ -297,6 +297,7 @@ end);
 
 hook.Add("OnEndRound", "discord_OnEndRound", function()
   print("ROUND ENDED!")
+  print(#player.GetAll())
 
   timer.Simple(0.1, function()
     print("TIMER ENDED")
