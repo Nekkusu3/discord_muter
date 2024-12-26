@@ -318,10 +318,7 @@ hook.Add("OnStartRound", "discord_OnStartRound", function()
 end);
 
 hook.Add("PostPlayerDeath", "discord_PostPlayerDeath", function(target_ply)
-  print(getAlivePlayer())
-
   if getAlivePlayer() <= 1 then
-    print("NOT ENOUGH ALIVE PLAYERS")
     return
   end
 
