@@ -320,7 +320,7 @@ end);
 hook.Add("PostPlayerDeath", "discord_PostPlayerDeath", function(target_ply)
   print(getAlivePlayer())
 
-  if getAlivePlayer() <= 1 then
+  if getAlivePlayer() <= 2 then
     return
   end
 
