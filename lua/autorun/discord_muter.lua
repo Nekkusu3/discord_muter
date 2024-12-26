@@ -127,6 +127,18 @@ function commonRoundState()
   return -1;
 end
 
+function getAlivePlayer()
+  local players = player.GetAll()
+  local alivePlayers = #players
+
+  for _, ply in ipairs(players) do
+    if not ply:Alive() and ply:IsSpec() then
+      alivePlayers = alivePlayers - 1
+    end
+  end
+  return alivePlayers
+end
+
 function joinMessage(target_ply)
   playerMessage("JOIN_DISCORD_PROMPT", target_ply, GetConVar("discord_server_link"):GetString());
   playerMessage("CONNECTION_INSTRUCTIONS", target_ply);
@@ -306,7 +318,11 @@ hook.Add("OnStartRound", "discord_OnStartRound", function()
 end);
 
 hook.Add("PostPlayerDeath", "discord_PostPlayerDeath", function(target_ply)
-  print("MUTED PLAYER")
+  print(getAlivePlayer())
+
+  if getAlivePlayer() <= 1 then
+    return
+  end
 
   if (commonRoundState() == 1) then
     if (GetConVar("discord_mute_round"):GetBool()) then
@@ -320,13 +336,9 @@ end);
 
 -- TTT Specific
 hook.Add("TTTEndRound", "discord_TTTEndRound", function()
-  print("ROUND ENDED!")
-  print(#player.GetAll())
-
   timer.Simple(0.1, function()
-    print("TIMER ENDED!")
     unmutePlayer();
-  end);
+  end)
 end);
 
 hook.Add("TTTBeginRound", "discord_TTTBeginRound", function()
