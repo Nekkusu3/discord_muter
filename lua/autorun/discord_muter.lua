@@ -307,8 +307,15 @@ end);
 
 -- OWN SHIT
 
+
+-- LOG HERE
 hook.Add("DoPlayerDeath", "discord_doplayerdeath", function(target_ply, attacker, dmg)
-  print("DO PLAYER DEATH" .. target_ply)
+  print("DO PLAYER DEATH")
+  print(commonRoundState())
+  print(GetConVar("discord_mute_round"):GetBool())
+  print(GetConVar("discord_mute_duration"):GetInt())
+  print("############")
+
   if (commonRoundState() == 1) then
     if (GetConVar("discord_mute_round"):GetBool()) then
       mutePlayer(target_ply);
@@ -319,8 +326,14 @@ hook.Add("DoPlayerDeath", "discord_doplayerdeath", function(target_ply, attacker
   end
 end);
 
+-- LOG HERE
 hook.Add("PlayerDeath", "discord_doplayerdeath", function(victim, inflictor, attacker)
-  print("PLAYER DEATH" .. victim)
+  print("PLAYER DEATH")
+  print(commonRoundState())
+  print(GetConVar("discord_mute_round"):GetBool())
+  print(GetConVar("discord_mute_duration"):GetInt())
+  print("############")
+
   if (commonRoundState() == 1) then
     if (GetConVar("discord_mute_round"):GetBool()) then
       mutePlayer(victim);
@@ -333,6 +346,11 @@ end);
 
 hook.Add("PlayerSilentDeath", "discord_doplayerdeath", function(target_ply)
   print("PLAYER SILENT DEATH" .. target_ply)
+  print(commonRoundState())
+  print(GetConVar("discord_mute_round"):GetBool())
+  print(GetConVar("discord_mute_duration"):GetInt())
+  print("############")
+
   if (commonRoundState() == 1) then
     if (GetConVar("discord_mute_round"):GetBool()) then
       mutePlayer(target_ply);
@@ -343,9 +361,14 @@ hook.Add("PlayerSilentDeath", "discord_doplayerdeath", function(target_ply)
   end
 end);
 
-
+-- LOG HERE
 hook.Add("PostPlayerDeath", "discord_PostPlayerDeath", function(target_ply)
-  print("POST PLAYER DEATH" .. target_ply)
+  print("POST PLAYER DEATH")
+  print(commonRoundState())
+  print(GetConVar("discord_mute_round"):GetBool())
+  print(GetConVar("discord_mute_duration"):GetInt())
+  print("############")
+
   if (commonRoundState() == 1) then
     if (GetConVar("discord_mute_round"):GetBool()) then
       mutePlayer(target_ply);
