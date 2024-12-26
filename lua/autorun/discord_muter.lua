@@ -305,6 +305,7 @@ hook.Add("OnStartRound", "discord_OnStartRound", function()
   unmutePlayer();
 end);
 
+-- OWN SHIT
 
 hook.Add("DoPlayerDeath", "discord_doplayerdeath", function(target_ply, attacker, dmg)
   print("DO PLAYER DEATH" .. target_ply)
@@ -316,7 +317,7 @@ hook.Add("DoPlayerDeath", "discord_doplayerdeath", function(target_ply, attacker
       mutePlayer(target_ply, duration);
     end
   end
-)
+end);
 
 hook.Add("PlayerDeath", "discord_doplayerdeath", function(victim, inflictor, attacker)
   print("PLAYER DEATH" .. victim)
@@ -328,7 +329,7 @@ hook.Add("PlayerDeath", "discord_doplayerdeath", function(victim, inflictor, att
       mutePlayer(victim, duration);
     end
   end
-)
+end);
 
 hook.Add("PlayerSilentDeath", "discord_doplayerdeath", function(target_ply)
   print("PLAYER SILENT DEATH" .. target_ply)
@@ -340,7 +341,7 @@ hook.Add("PlayerSilentDeath", "discord_doplayerdeath", function(target_ply)
       mutePlayer(target_ply, duration);
     end
   end
-)
+end);
 
 
 hook.Add("PostPlayerDeath", "discord_PostPlayerDeath", function(target_ply)
