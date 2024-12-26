@@ -296,7 +296,10 @@ hook.Add("ShutDown", "discord_ShutDown", function()
 end);
 
 hook.Add("OnEndRound", "discord_OnEndRound", function()
+  print("ROUND ENDED!")
+
   timer.Simple(0.1, function()
+    print("TIMER ENDED")
     unmutePlayer();
   end);
 end);
@@ -306,6 +309,8 @@ hook.Add("OnStartRound", "discord_OnStartRound", function()
 end);
 
 hook.Add("PostPlayerDeath", "discord_PostPlayerDeath", function(target_ply)
+  print("MUTED PLAYER")
+
   if (commonRoundState() == 1) then
     if (GetConVar("discord_mute_round"):GetBool()) then
       mutePlayer(target_ply);
