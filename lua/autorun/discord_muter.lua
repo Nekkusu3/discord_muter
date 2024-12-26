@@ -120,6 +120,10 @@ function mute(target_ply)
 end
 
 function commonRoundState()
+  print(gmod.GetGamemode().Name)
+  print(GetRoundState())
+  print(gmod.GetGamemode():GetRound())
+
   if (gmod.GetGamemode().Name == "Trouble in Terrorist Town" or gmod.GetGamemode().Name == "TTT2 (Advanced Update)") then return (GetRoundState() == 3) and 1 or 0; end -- Round state 3 => Game is running
   if (gmod.GetGamemode().Name == "Murder") then return (gmod.GetGamemode():GetRound() == 1) and 1 or 0; end -- Round state 1 => Game is running
   -- Round state could not be determined
