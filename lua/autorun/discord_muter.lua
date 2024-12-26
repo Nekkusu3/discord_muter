@@ -296,11 +296,7 @@ hook.Add("ShutDown", "discord_ShutDown", function()
 end);
 
 hook.Add("OnEndRound", "discord_OnEndRound", function()
-  print("ROUND ENDED!")
-  print(#player.GetAll())
-
   timer.Simple(0.1, function()
-    print("TIMER ENDED")
     unmutePlayer();
   end);
 end);
@@ -324,7 +320,11 @@ end);
 
 -- TTT Specific
 hook.Add("TTTEndRound", "discord_TTTEndRound", function()
+  print("ROUND ENDED!")
+  print(#player.GetAll())
+
   timer.Simple(0.1, function()
+    print("TIMER ENDED!")
     unmutePlayer();
   end);
 end);
