@@ -95,14 +95,22 @@ function getAlivePlayer()
     return alivePlayers
 end
 
-function unmutePlayer(target_ply)
-    print("TRYING TO UNMUTE PLAYER")
-    if not target_ply then
-        print("CANT UNMUTE PLAYER")
-        print(target_ply)
-        print("########")
-        return
+function printTable(table)
+    for key, value in pairs(table) do
+        if type(value) == "table" then
+            print(key .. ":{")
+            printTable(value)
+            print("}")
+        else
+            print(key .. ":" .. tostring(value))
+        end
     end
+end
+
+function unmutePlayer(target_ply)
+    printTable(target_ply)
+    print(target_ply)
+    print("############")
 
     if target_ply and _G.steamIDToDiscordIDConnectionTable[target_ply:steamID()] and isMuted(target_ply) then 
         http_mute(false, target_ply, "UNMUTED_PLAYER")
