@@ -39,12 +39,6 @@ function unmuteAll()
 end
 
 function http_mute(muteStatus, target_ply, msg, duration)
-    print("SENDING HTTP MUTE REQUEST")
-    print(muteStatus)
-    print(target_ply)
-    print(msg)
-    print(duration)
-    print("######")
     httpFetch("mute", {
         mute = muteStatus,
         id = _G.steamIDToDiscordIDConnectionTable[target_ply:SteamID()]
@@ -67,6 +61,10 @@ end
 
 function mutePlayer(target_ply, duration)
     print("MUTING PLAYER")
+    print(target_ply)
+    print(duration)
+    print("########")
+
     if target_ply and _G.steamIDToDiscordIDConnectionTable[target_ply:SteamID()] and not isMuted(target_ply) then http_mute(true, target_ply, "MUTED_PLAYER", duration) end
 end
 
@@ -98,7 +96,14 @@ function getAlivePlayer()
 end
 
 function unmutePlayer(target_ply)
-    print("UMMUTE PLAYER")
+    print("TRYING TO UNMUTE PLAYER")
+    if not target_ply then
+        print("CANT UNMUTE PLAYER")
+        print(target_ply)
+        print("########")
+        return
+    end
+
     if target_ply and _G.steamIDToDiscordIDConnectionTable[target_ply:steamID()] and isMuted(target_ply) then 
         http_mute(false, target_ply, "UNMUTED_PLAYER")
     end
