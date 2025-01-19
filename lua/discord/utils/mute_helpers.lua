@@ -47,8 +47,11 @@ function http_mute(muteStatus, target_ply, msg, duration)
                 playerMessage(msg, target_ply)
             end
 
+            print("DISCORD MUTE HTTP RESPONSE")
             drawMuteIcon(target_ply, muteStatus)
             _G.mutedPlayerTable[target_ply] = muteStatus
+            print(_G.mutedPlayerTable[target_ply])
+            print("#")
         elseif res and res.errorMsg then
             announceMessage("ERROR_MESSAGE", res.errorMsg)
         end
@@ -56,7 +59,6 @@ function http_mute(muteStatus, target_ply, msg, duration)
 end
 
 function mutePlayer(target_ply, duration)
-
     if target_ply and _G.steamIDToDiscordIDConnectionTable[target_ply:SteamID()] and not isMuted(target_ply) then http_mute(true, target_ply, "MUTED_PLAYER", duration) end
 end
 
@@ -88,6 +90,11 @@ end
 
 function unmutePlayer(target_ply)
     print("DISCORD UNMUTING PLAYER")
+
+    print(#_G.mutedPlayerTable)
+    for key, value in pairs(_G.mutedPlayerTable) do
+        print(key .. ":" .. value)
+    end
 
     print(_G.steamIDToDiscordIDConnectionTable[target_ply:SteamID()])
     print(isMuted(target_ply))
