@@ -106,7 +106,7 @@ end)
 
 -- TTT Specific
 hook.Add("TTTEndRound", "discord_TTTEndRound", function()
-  print("ROUND END TTT")
+  print("DISCORD ROUND END TTT")
   unmuteAll()
 end)
 
