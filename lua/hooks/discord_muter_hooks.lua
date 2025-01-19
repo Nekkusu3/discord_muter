@@ -6,7 +6,6 @@ if SERVER then
   include("discord/utils/discord_connection.lua")
   include("discord/utils/http.lua")
   include("discord/utils/mute_helpers.lua")
-  inlcude("discord/utils/discord_muter_globals.lua")
 end
 
 hook.Add("PlayerSay", "discord_PlayerSay", function(target_ply, msg)
@@ -34,7 +33,6 @@ end)
 
 hook.Add("PlayerInitialSpawn", "discord_PlayerInitialSpawn", function(target_ply)
   print("PLAYER SPWANED")
-  
   if _G.steamIDToDiscordIDConnectionTable[target_ply:SteamID()] then
     playerMessage("WELCOME_CONNECTED", target_ply)
   else

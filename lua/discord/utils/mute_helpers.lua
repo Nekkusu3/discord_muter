@@ -1,5 +1,4 @@
 if SERVER then
-    include("discord/utils/discord_muter_globals.lua")
     include("discord/utils/messaging.lua")
 end
 
