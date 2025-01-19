@@ -10,15 +10,21 @@ function drawMuteIcon(target_ply, drawMute)
 end
 
 function isMuted(target_ply)
+    print("PLAYER IS MUTED")
+    print(_G.mutedPlayerTable[target_ply])
+    print("######")
     return _G.mutedPlayerTable[target_ply]
 end
 
 -- UnMute Player Alias (for compatability)
 function unmute(target_ply)
+    print("ALSO UNMUTING PLAYER")
+    print(target_ply)
     unmutePlayer(target_ply)
 end
 
 function muteAll(duration)
+    print("MUTE ALL")
     local players = player.GetAll()
     for _, ply in ipairs(players) do
         mutePlayer(ply, duration)
@@ -26,6 +32,7 @@ function muteAll(duration)
 end
 
 function unmuteAll()
+    print("UNMUTE ALL")
     local players = player.GetAll()
     for _, ply in ipairs(players) do
         unmutePlayer(ply, duration)
@@ -33,6 +40,12 @@ function unmuteAll()
 end
 
 function http_mute(muteStatus, target_ply, msg, duration)
+    print("SENDING HTTP MUTE REQUEST")
+    print(muteStatus)
+    print(target_ply)
+    print(msg)
+    print(duration)
+    print("######")
     httpFetch("mute", {
         mute = muteStatus,
         id = _G.steamIDToDiscordIDConnectionTable[target_ply:SteamID()]
@@ -54,11 +67,13 @@ function http_mute(muteStatus, target_ply, msg, duration)
 end
 
 function mutePlayer(target_ply, duration)
+    print("MUTING PLAYER")
     if target_ply and _G.steamIDToDiscordIDConnectionTable[target_ply:SteamID()] and not isMuted(target_ply) then http_mute(true, target_ply, "MUTED_PLAYER", duration) end
 end
 
 -- Mute Player Alias (for compatability)
 function mute(target_ply)
+    print("ALSO MUTING PLAYER")
     mutePlayer(target_ply)
 end
 
@@ -84,6 +99,7 @@ function getAlivePlayer()
 end
 
 function unmutePlayer(target_ply)
+    print("UMMUTE PLAYER")
     if target_ply and _G.steamIDToDiscordIDConnectionTable[target_ply:steamID()] and isMuted(target_ply) then 
         http_mute(false, target_ply, "UNMUTED_PLAYER")
     end
