@@ -8,10 +8,6 @@ function drawMuteIcon(target_ply, drawMute)
     net.Send(target_ply)
 end
 
-function isMuted(target_ply)
-    return _G.mutedPlayerTable[target_ply:SteamID()] or false
-end
-
 -- UnMute Player Alias (for compatability)
 function unmute(target_ply)
     print(target_ply)
@@ -39,7 +35,11 @@ function set_mute_status(target_ply, mute_status)
 end
 
 function get_mute_status(target_ply)
-    return _G.mutedPlayerTable[tostring(target_ply:SteamID())]
+    local mute_status = _G.mutedPlayerTable[tostring(target_ply:SteamID())]
+    if mute_status == nil then
+        mute_status = false
+    end
+    return mute_status
 end
 
 function http_mute(muteStatus, target_ply, msg, duration)
@@ -59,11 +59,6 @@ function http_mute(muteStatus, target_ply, msg, duration)
             drawMuteIcon(target_ply, muteStatus)
 
             set_mute_status(target_ply, muteStatus)
-            print(tostring(muteStatus))
-            print(tostring(target_ply:SteamID()))
-            print(tostring(get_mute_status(target_ply)))
-            print("######################################")
-
         elseif res and res.errorMsg then
             announceMessage("ERROR_MESSAGE", res.errorMsg)
         end
@@ -71,7 +66,7 @@ function http_mute(muteStatus, target_ply, msg, duration)
 end
 
 function mutePlayer(target_ply, duration)
-    if target_ply and _G.steamIDToDiscordIDConnectionTable[target_ply:SteamID()] and not isMuted(target_ply) then http_mute(true, target_ply, "MUTED_PLAYER", duration) end
+    if target_ply and _G.steamIDToDiscordIDConnectionTable[target_ply:SteamID()] and not get_mute_status(target_ply) then http_mute(true, target_ply, "MUTED_PLAYER", duration) end
 end
 
 -- Mute Player Alias (for compatability)
@@ -106,7 +101,7 @@ function unmutePlayer(target_ply)
         return
     end
 
-    if target_ply and _G.steamIDToDiscordIDConnectionTable[target_ply:SteamID()] and isMuted(target_ply) then
+    if target_ply and _G.steamIDToDiscordIDConnectionTable[target_ply:SteamID()] and get_mute_status(target_ply) then
         http_mute(false, target_ply, "UNMUTED_PLAYER")
     end
 end
