@@ -1,6 +1,5 @@
 local turkce = {
-  MUTED_FOR_DURATION = "%s saniye boyunca sessize alındınız.",
-  MUTED_FOR_ROUND = "Tur bitene kadar sessize alındınız.",
+  MUTED = "Tur bitene kadar sessize alındınız.",
   UNMUTED = "Artık sessiz değilsiniz.",
   ERROR_MESSAGE = "Hata: %s",
   JOIN_DISCORD_PROMPT = "Discord sunucusuna katıl - %s",

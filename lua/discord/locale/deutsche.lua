@@ -1,6 +1,5 @@
 local deutsche = {
-  MUTED_FOR_DURATION = "Du bist für %s Sekunden stumm geschaltet.",
-  MUTED_FOR_ROUND = "Du bist stumm geschaltet, bis die Runde endet.",
+  MUTED = "Du bist stumm geschaltet",
   UNMUTED = "Du bist nicht mehr stumm geschaltet.",
   ERROR_MESSAGE = "Fehler: %s",
   JOIN_DISCORD_PROMPT = "Tritt dem Discord Server bei: %s",

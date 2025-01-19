@@ -10,7 +10,6 @@ end
 
 -- UnMute Player Alias (for compatability)
 function unmute(target_ply)
-    print(target_ply)
     unmutePlayer(target_ply)
 end
 
@@ -22,8 +21,6 @@ function muteAll(duration)
 end
 
 function unmuteAll()
-    print("DISCORD UNMUTE ALL")
-
     local players = player.GetAll()
     for _, ply in ipairs(players) do
         unmutePlayer(ply, duration)
@@ -43,7 +40,6 @@ function get_mute_status(target_ply)
 end
 
 function http_mute(muteStatus, target_ply, msg, duration)
-    print("DISCORD HTTP MUTE")
     httpFetch("mute", {
         mute = muteStatus,
         id = _G.steamIDToDiscordIDConnectionTable[target_ply:SteamID()]
@@ -57,7 +53,6 @@ function http_mute(muteStatus, target_ply, msg, duration)
             end
 
             drawMuteIcon(target_ply, muteStatus)
-
             set_mute_status(target_ply, muteStatus)
         elseif res and res.errorMsg then
             announceMessage("ERROR_MESSAGE", res.errorMsg)
@@ -66,7 +61,7 @@ function http_mute(muteStatus, target_ply, msg, duration)
 end
 
 function mutePlayer(target_ply, duration)
-    if target_ply and _G.steamIDToDiscordIDConnectionTable[target_ply:SteamID()] and not get_mute_status(target_ply) then http_mute(true, target_ply, "MUTED_PLAYER", duration) end
+    if target_ply and _G.steamIDToDiscordIDConnectionTable[target_ply:SteamID()] and not get_mute_status(target_ply) then http_mute(true, target_ply, "MUTED", duration) end
 end
 
 -- Mute Player Alias (for compatability)
@@ -102,6 +97,6 @@ function unmutePlayer(target_ply)
     end
 
     if target_ply and _G.steamIDToDiscordIDConnectionTable[target_ply:SteamID()] and get_mute_status(target_ply) then
-        http_mute(false, target_ply, "UNMUTED_PLAYER")
+        http_mute(false, target_ply, "UNMUTED")
     end
 end

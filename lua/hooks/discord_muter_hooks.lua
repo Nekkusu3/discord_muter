@@ -1,5 +1,3 @@
-print("RUNNING HOOKS.LUA")
-
 if SERVER then
   include("discord/utils/logging.lua")
   include("discord/utils/messaging.lua")
@@ -9,7 +7,6 @@ if SERVER then
 end
 
 hook.Add("PlayerSay", "discord_PlayerSay", function(target_ply, msg)
-  print("PLAYER SAID SOMETHING")
   if string.sub(msg, 1, 9) ~= "!discord " then return end
   tag = string.sub(msg, 10)
   tag_utf8 = ""
@@ -32,7 +29,6 @@ hook.Add("PlayerSay", "discord_PlayerSay", function(target_ply, msg)
 end)
 
 hook.Add("PlayerInitialSpawn", "discord_PlayerInitialSpawn", function(target_ply)
-  print("PLAYER SPWANED")
   if _G.steamIDToDiscordIDConnectionTable[target_ply:SteamID()] then
     playerMessage("WELCOME_CONNECTED", target_ply)
   else
@@ -64,10 +60,6 @@ hook.Add("ConnectPlayer", "discord_ConnectPlayer", function(target_ply, discordI
 hook.Add("DisconnectPlayer", "discord_DisconnectPlayer", function(target_ply) removeConnectionID(target_ply) end)
 
 hook.Add("MutePlayer", "discord_MutePlayer", function(target_ply, duration)
-  print("MUTING PLAYER")
-  print(target_ply)
-  print(duration)
-  print("##########")
   if duration > 0 then
     mutePlayer(target_ply, duration)
   else
@@ -82,7 +74,6 @@ hook.Add("ShutDown", "discord_ShutDown", function() unmutePlayer() end)
 hook.Add("OnStartRound", "discord_OnStartRound", function() unmutePlayer() end)
 
 hook.Add("PostPlayerDeath", "discord_PostPlayerDeath", function(target_ply)
-  print("POST PLAYER DEATH")
   if getAlivePlayer() <= 1 then return end
   if commonRoundState() == 1 then
     if GetConVar("discord_mute_round"):GetBool() then
@@ -95,22 +86,18 @@ hook.Add("PostPlayerDeath", "discord_PostPlayerDeath", function(target_ply)
 end)
 
 hook.Add("OnEndRound", "discord_OnEndRound", function()
-  print("ROUND END")
   unmuteAll()
 end)
 
 hook.Add("OnStartRound", "discord_OnStartRound", function()
-  print("ROUND START")
   unmuteAll()
 end)
 
 -- TTT Specific
 hook.Add("TTTEndRound", "discord_TTTEndRound", function()
-  print("DISCORD ROUND END TTT")
   unmuteAll()
 end)
 
 hook.Add("TTTBeginRound", "discord_TTTBeginRound", function()
-  print("ROUND START TTT")
   unmuteAll()
 end)
