@@ -1,17 +1,13 @@
 local deutsche = {
-  MUTED_FOR_DURATION = "Sie sind %s Sekunden lang stumm geschaltet.",
-  MUTED_FOR_ROUND = "Du bist stumm geschaltet, bis die Runde endet.",
+  MUTED = "Du bist stumm geschaltet",
   UNMUTED = "Du bist nicht mehr stumm geschaltet.",
-  ERROR_MESSAGE = "Error: %s",
-  JOIN_DISCORD_PROMPT = "Treten Sie dem Discord Server bei - %s",
-  CONNECTION_INSTRUCTIONS = "Verbinden Sie sich dann, indem Sie im Chat '!discord DISCORD_NAME' sagen. Z.B. '!discord Manix84'",
-  NAME_NOT_FOUND = "Auf dem Discord-Server befindet sich niemand mit einem Namen wie '%s'.",
-  MULTIPLE_NAMES_FOUND = "Es wurde mehr als ein Benutzer mit einem Namen wie '%s' gefunden. Probieren Sie Ihren vollständigen Discord Tag aus, z. '!discord MANIX84#1234'",
-  CONNECTION_SUCCESSFUL = "'%s' (%s) erfolgreich an '%s' gebunden.",
-  WELCOME_CONNECTED = "Sie sind mit Discord verbunden.",
-  AUTOMATIC_MATCH = "Versuch, mit Ihrem Namen übereinzustimmen, '%s'",
-
-
+  ERROR_MESSAGE = "Fehler: %s",
+  JOIN_DISCORD_PROMPT = "Tritt dem Discord Server bei: %s",
+  CONNECTION_INSTRUCTIONS = "Verbinde dich dann, indem du in den Chat '!discord DISCORD_NAME' schreibst. Z.B. '!discord Manix84'",
+  NAME_NOT_FOUND = "Es wurde kein Nutzer mit dem Namen '%s' auf dem Discord gefunden.",
+  MULTIPLE_NAMES_FOUND = "Es wurde mehr als ein Nutzer mit dem Namen '%s' auf dem Discord gefunden.",
+  CONNECTION_SUCCESSFUL = "'%s' (%s) wurde mit '%s' verbunden!",
+  WELCOME_CONNECTED = "Du bist mit Discord verbunden.",
+  AUTOMATIC_MATCH = "Es wird versucht dein Name auf Discord zu verbinden, '%s'",
 }
-
 return deutsche
