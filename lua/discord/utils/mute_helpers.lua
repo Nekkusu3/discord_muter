@@ -34,7 +34,16 @@ function unmuteAll()
     end
 end
 
+function set_mute_status(target_ply, mute_status)
+    _G.mutedPlayerTable[tostring(target_ply:SteamID())] = mute_status
+end
+
+function get_mute_status(target_ply)
+    return _G.mutedPlayerTable[tostring(target_ply:SteamID())]
+end
+
 function http_mute(muteStatus, target_ply, msg, duration)
+    print("DISCORD HTTP MUTE")
     httpFetch("mute", {
         mute = muteStatus,
         id = _G.steamIDToDiscordIDConnectionTable[target_ply:SteamID()]
@@ -48,7 +57,13 @@ function http_mute(muteStatus, target_ply, msg, duration)
             end
 
             drawMuteIcon(target_ply, muteStatus)
-            _G.mutedPlayerTable[target_ply:SteamID()] = muteStatus
+
+            set_mute_status(target_ply, muteStatus)
+            print(tostring(muteStatus))
+            print(tostring(target_ply:SteamID()))
+            print(tostring(get_mute_status(target_ply)))
+            print("######################################")
+
         elseif res and res.errorMsg then
             announceMessage("ERROR_MESSAGE", res.errorMsg)
         end
@@ -90,8 +105,6 @@ function unmutePlayer(target_ply)
         print("PLAYER IS NOT VALID")
         return
     end
-
-    print(tostring(target_ply:SteamID()) .. ":" .. tostring(_G.mutedPlayerTable[target_ply:SteamID()]))
 
     if target_ply and _G.steamIDToDiscordIDConnectionTable[target_ply:SteamID()] and isMuted(target_ply) then
         http_mute(false, target_ply, "UNMUTED_PLAYER")
