@@ -51,8 +51,8 @@ function http_mute(muteStatus, target_ply, msg, duration)
                 playerMessage(msg, target_ply)
             end
 
-            drawMuteIcon(target_ply, true)
-            _G.mutedPlayerTable[target_ply] = true
+            drawMuteIcon(target_ply, muteStatus)
+            _G.mutedPlayerTable[target_ply] = muteStatus
         elseif res and res.errorMsg then
             announceMessage("ERROR_MESSAGE", res.errorMsg)
         end
