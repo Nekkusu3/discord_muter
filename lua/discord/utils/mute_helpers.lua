@@ -96,11 +96,7 @@ function getAlivePlayer()
 end
 
 function unmutePlayer(target_ply)
-    print(IsValid(target_ply))
-    print(target_ply:Nick())
-    print("############")
-
-    if target_ply and _G.steamIDToDiscordIDConnectionTable[target_ply:steamID()] and isMuted(target_ply) then 
+    if target_ply and _G.steamIDToDiscordIDConnectionTable[target_ply:SteamID()] and isMuted(target_ply) then 
         http_mute(false, target_ply, "UNMUTED_PLAYER")
     end
 end
