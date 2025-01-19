@@ -73,7 +73,7 @@ end)
 
 net.Receive("request_discordPlayerTable", function(len, calling_ply)
   if not calling_ply:IsSuperAdmin() then return end
-  local connectionsJSON = util.TableToJSON(globals.steamIDToDiscordIDConnectionTable)
+  local connectionsJSON = util.TableToJSON(_G.steamIDToDiscordIDConnectionTable)
   local compressedConnections = util.Compress(connectionsJSON)
   net.Start("discordPlayerTable")
   net.WriteUInt(#compressedConnections, 32)
