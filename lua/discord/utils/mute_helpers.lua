@@ -95,21 +95,9 @@ function getAlivePlayer()
     return alivePlayers
 end
 
-function printTable(table)
-    for key, value in pairs(table) do
-        if type(value) == "table" then
-            print(key .. ":{")
-            printTable(value)
-            print("}")
-        else
-            print(key .. ":" .. tostring(value))
-        end
-    end
-end
-
 function unmutePlayer(target_ply)
-    printTable(target_ply)
-    print(target_ply)
+    print(IsValid(target_ply))
+    print(target_ply:Nick())
     print("############")
 
     if target_ply and _G.steamIDToDiscordIDConnectionTable[target_ply:steamID()] and isMuted(target_ply) then 
